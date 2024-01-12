@@ -15,7 +15,9 @@ const init = () => {
 	const controls = new OrbitControls(camera, canvas);
 	controls.enableDamping = true;
 
-	const renderer = new THREE.WebGLRenderer({ canvas });
+	const renderer = new THREE.WebGLRenderer({antialias: true, canvas });
+	console.log(renderer)
+	renderer.shadowMap.enabled = true;
 	renderer.setSize(sizes.width, sizes.height);
 	renderer.render(scene, camera);
 
