@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-
 import init from './init';
 
 import './style.css';
