@@ -8,6 +8,7 @@ const init = () => {
 	};
 
 	const scene = new THREE.Scene();
+	scene.background = new THREE.Color(0x202020);
 	const canvas = document.querySelector('.canvas');
 	const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100000);
 	scene.add(camera);
@@ -16,8 +17,11 @@ const init = () => {
 	controls.enableDamping = true;
 
 	const renderer = new THREE.WebGLRenderer({antialias: true, canvas });
-	console.log(renderer)
+
+
 	renderer.shadowMap.enabled = true;
+	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
 	renderer.setSize(sizes.width, sizes.height);
 	renderer.render(scene, camera);
 
