@@ -3,6 +3,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import init from './init';
 import Stats from 'stats.js';
 import * as dat from 'lil-gui';
+import * as CANNON from 'cannon-es';
+import CannonDebugRenderer from 'cannon-es-debugger'
 // import ColorGUIHelper from './ColorGUIHelper';
 import './style.css';
 
@@ -237,6 +239,25 @@ loader.load(
 );
 
 
+// Физика Cannon--------------------------------------------------------------
+
+// World
+const world = new CANNON.World();
+world.gravity.set(0, -9.8, 0);
+
+// CannonDebugRenderer
+const cannonDebugRenderer = new CannonDebugRenderer(scene, world);
+
+// Пол
+const floorBody = new CANNON.Body({
+	mass: 0,
+})
+let floorShape = new CANNON.Plane(0.1, 0.2)
+floorBody.addShape(floorShape);
+floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2)
+world.addBody(floorBody);
+
+
 // Функционал-----------------------------------------------------------------
 
 // const geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -319,3 +340,4 @@ function handleKeyDown (event) {
 			break;
 	}
 }
+
